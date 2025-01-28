@@ -1,14 +1,19 @@
 {
+    "version": 2,
     "builds": [
       {
         "src": "package.json",
-        "use": "@vercel/node"
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
       }
     ],
-    "build": {
-      "env": {
-        "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
       }
-    }
+    ]
   }
   
