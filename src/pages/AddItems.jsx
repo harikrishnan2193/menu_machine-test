@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import { addMenuApi, getAllMenuApi } from '../services/allAPI';
+import { addMenuApi, addMenuItemsApi, getAllMenuApi } from '../services/allAPI';
 
 function AddItems() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,22 +13,25 @@ function AddItems() {
     console.log(menudata);
 
     const [menuItems, setMenuItems] = useState({
-        itemName:'',
-        discription:'',
-        amount:''
+        itemName: '',
+        description: '',
+        amount: '',
+        menu_id: null,
     })
     console.log(menuItems);
-    
+
     const [menus, setMenus] = useState([]);
 
 
-    const toggleModal = () => {
+
+    const toggleModal = (menu_id = null) => {
         setIsModalOpen(!isModalOpen);
+        setMenuItems(prev => ({ ...prev, menu_id }));
     };
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
+    // const toggleSidebar = () => {
+    //     setIsSidebarOpen(!isSidebarOpen);
+    // };
 
     const handleMenuUpdate = async () => {
         const { menuName, menuDiscription } = menudata;
@@ -65,6 +68,32 @@ function AddItems() {
             alert('Failed to fetch menus');
         }
     }
+
+    const handleItemAdd = async () => {
+        const { itemName, description, amount, menu_id } = menuItems;
+    
+        if (!itemName || !description || !amount) {
+            alert('Please fill all the fields');
+            return;
+        }
+    
+        const result = await addMenuItemsApi({ itemName, description, amount, menu_id });
+    
+        console.log(result);
+        if (result.status === 201) {
+            alert('Menu item added successfully');
+            setMenuItems({
+                itemName: '',
+                discription: '',
+                amount: '',
+                menu_id: null,
+            });
+            toggleModal(); 
+        } else {
+            alert(result.error || 'Something went wrong');
+        }
+    };
+    
 
     useEffect(() => {
         getAllMenu();
@@ -105,23 +134,23 @@ function AddItems() {
                     <h1 className="text-2xl font-bold mb-5 text-center">Menus</h1>
                     <ul className="space-y-4">
                         {menus.map((menu) => (
-                            <li key={menu.id} className="flex items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md">
+                            <li key={menu.menu_id} className="flex items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md">
                                 <div className='w-75'>
                                     <span className="block text-lg font-medium">{menu.menu_name}</span>
                                     <span className="text-sm hidden sm:block">{menu.menu_description}</span>
                                 </div>
 
                                 <div className="flex gap-2">
-                                    <button onClick={toggleModal}
+                                    <button onClick={() => toggleModal(menu.menu_id)}
                                         className="edit-permission-btn px-4 py-2 bg-primary text-sm font-semibold rounded-lg shadow-md hover:bg-primary_hover"
                                     >
                                         Add item
                                     </button>
-                                    <button onClick={toggleSidebar}
+                                    {/* <button onClick={toggleSidebar}
                                         className="delete-permission-btn px-4 py-2 bg-gray-600 text-sm font-semibold rounded-lg shadow-md hover:bg-gray-800"
                                     >
                                         Open Menu
-                                    </button>
+                                    </button> */}
                                 </div>
                             </li>
                         ))}
@@ -138,7 +167,7 @@ function AddItems() {
                                 placeholder="Enter item name"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                             />
-                            <input onChange={(e) => setMenuItems({ ...menuItems, discription: e.target.value })} value={menuItems.discription}
+                            <input onChange={(e) => setMenuItems({ ...menuItems, description: e.target.value })} value={menuItems.description}
                                 type="text"
                                 placeholder="Enter description"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
@@ -155,7 +184,8 @@ function AddItems() {
                                 >
                                     Cancel
                                 </button>
-                                <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+                                <button onClick={handleItemAdd}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg">
                                     Add Item
                                 </button>
                             </div>
@@ -164,7 +194,7 @@ function AddItems() {
                 )}
 
                 {/* side bar */}
-                {isSidebarOpen && (
+                {/* {isSidebarOpen && (
                     <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-end z-20">
                         <div className="bg-black text-white w-80 h-full p-5 rounded-l-lg shadow-md transition-transform transform translate-x-0">
                             <button
@@ -183,7 +213,7 @@ function AddItems() {
                             </ul>
                         </div>
                     </div>
-                )}
+                )} */}
 
             </div>
         </div>

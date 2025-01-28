@@ -16,3 +16,8 @@ export const getAllMenuApi = async()=>{
 export const getMenuDetailsApi = async (menuId) => {
     return await commonAPI('GET', `${BASEURL}/menu/${menuId}`);
 }
+
+//add menu items 
+export const addMenuItemsApi = async (menuItems) => {
+    return await commonAPI('POST',`${BASEURL}/menu/additems`,menuItems,'')
+}

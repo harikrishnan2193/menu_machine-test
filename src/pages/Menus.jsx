@@ -33,7 +33,7 @@ function Menus() {
                 console.log(result.data); 
                 setMenuDetails(result.data.items || []);
             } else {
-                alert(result.error || 'Failed to fetch menu details');
+                alert(result.error || 'No items avilable');
             }
         } catch (error) {
             console.error('Error fetching menu details:', error);
