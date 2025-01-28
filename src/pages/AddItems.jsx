@@ -71,14 +71,14 @@ function AddItems() {
 
     const handleItemAdd = async () => {
         const { itemName, description, amount, menu_id } = menuItems;
-    
+
         if (!itemName || !description || !amount) {
             alert('Please fill all the fields');
             return;
         }
-    
+
         const result = await addMenuItemsApi({ itemName, description, amount, menu_id });
-    
+
         console.log(result);
         if (result.status === 201) {
             alert('Menu item added successfully');
@@ -88,12 +88,12 @@ function AddItems() {
                 amount: '',
                 menu_id: null,
             });
-            toggleModal(); 
+            toggleModal();
         } else {
             alert(result.error || 'Something went wrong');
         }
     };
-    
+
 
     useEffect(() => {
         getAllMenu();
@@ -160,37 +160,46 @@ function AddItems() {
                 {/* add item model */}
                 {isModalOpen && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                        <div className="bg-white text-black p-8 rounded-lg w-full sm:w-96">
+                        <div className="bg-gray-800 text-white p-8 rounded-lg w-full sm:w-96 shadow-lg">
                             <h3 className="text-2xl font-bold mb-4">Add New Menu Item</h3>
-                            <input onChange={(e) => setMenuItems({ ...menuItems, itemName: e.target.value })} value={menuItems.itemName}
+                            <input
+                                onChange={(e) => setMenuItems({ ...menuItems, itemName: e.target.value })}
+                                value={menuItems.itemName}
                                 type="text"
                                 placeholder="Enter item name"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
+                                className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg mb-4 placeholder-gray-400"
                             />
-                            <input onChange={(e) => setMenuItems({ ...menuItems, description: e.target.value })} value={menuItems.description}
+                            <input
+                                onChange={(e) => setMenuItems({ ...menuItems, description: e.target.value })}
+                                value={menuItems.description}
                                 type="text"
                                 placeholder="Enter description"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
+                                className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg mb-4 placeholder-gray-400"
                             />
-                            <input onChange={(e) => setMenuItems({ ...menuItems, amount: e.target.value })} value={menuItems.amount}
+                            <input
+                                onChange={(e) => setMenuItems({ ...menuItems, amount: e.target.value })}
+                                value={menuItems.amount}
                                 type="text"
                                 placeholder="Enter amount"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-6"
+                                className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg mb-6 placeholder-gray-400"
                             />
                             <div className="flex justify-end gap-4">
                                 <button
                                     onClick={toggleModal}
-                                    className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+                                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
                                 >
                                     Cancel
                                 </button>
-                                <button onClick={handleItemAdd}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+                                <button
+                                    onClick={handleItemAdd}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                                >
                                     Add Item
                                 </button>
                             </div>
                         </div>
                     </div>
+
                 )}
 
                 {/* side bar */}
