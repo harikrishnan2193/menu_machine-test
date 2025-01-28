@@ -96,7 +96,7 @@ function Menus() {
             >
                 <div className="border border-gray-600 p-8 relative">
                     <h2 className="text-4xl py-4 font-bold text-center text-white uppercase tracking-wide mb-8">
-                        Brunch Cocktails
+                        Items Avilable
                     </h2>
                     <div className="md:px-10">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
