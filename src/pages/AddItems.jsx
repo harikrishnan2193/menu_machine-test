@@ -12,6 +12,13 @@ function AddItems() {
     })
     console.log(menudata);
 
+    const [menuItems, setMenuItems] = useState({
+        itemName:'',
+        discription:'',
+        amount:''
+    })
+    console.log(menuItems);
+    
     const [menus, setMenus] = useState([]);
 
 
@@ -57,11 +64,11 @@ function AddItems() {
             console.error('Error fetching menus:', error);
             alert('Failed to fetch menus');
         }
-    };
+    }
 
     useEffect(() => {
         getAllMenu();
-    }, [menus]);
+    }, [menudata]);
 
 
     return (
@@ -126,17 +133,17 @@ function AddItems() {
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div className="bg-white text-black p-8 rounded-lg w-full sm:w-96">
                             <h3 className="text-2xl font-bold mb-4">Add New Menu Item</h3>
-                            <input
+                            <input onChange={(e) => setMenuItems({ ...menuItems, itemName: e.target.value })} value={menuItems.itemName}
                                 type="text"
                                 placeholder="Enter item name"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                             />
-                            <input
+                            <input onChange={(e) => setMenuItems({ ...menuItems, discription: e.target.value })} value={menuItems.discription}
                                 type="text"
                                 placeholder="Enter description"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                             />
-                            <input
+                            <input onChange={(e) => setMenuItems({ ...menuItems, amount: e.target.value })} value={menuItems.amount}
                                 type="text"
                                 placeholder="Enter amount"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-6"
