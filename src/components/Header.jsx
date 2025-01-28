@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { Link } from 'react-scroll';
 import logo from '../images/Screenshot_2025-01-27_214339-removebg-preview.png'
 
 function Header() {
@@ -13,10 +12,10 @@ function Header() {
                     <img className="md:mb-[-73px] relative z-10" src={logo} width={'25%'} alt="logo image" />
 
                     <div className="hidden text-white xl:flex flex-col sm:flex-row space-x-0 sm:space-x-8 space-y-2 sm:space-y-0">
-                        <Link to='services'><a className="hover:text-blue-400 hover:cursor-pointer">HOME</a></Link>
-                        <Link to='skills-section'><a className="hover:text-blue-400 hover:cursor-pointer">MENU</a></Link>
-                        <Link to='potfolio'><a className="hover:text-blue-400 hover:cursor-pointer">MAKE A RESERVATION</a></Link>
-                        <Link to='potfolio'><a className="hover:text-blue-400 hover:cursor-pointer">CONTACT US</a></Link>
+                        <Link to='/'><a className="hover:text-blue-400 hover:cursor-pointer">HOME</a></Link>
+                        <Link><a className="hover:text-blue-400 hover:cursor-pointer">MENU</a></Link>
+                        <Link><a className="hover:text-blue-400 hover:cursor-pointer">MAKE A RESERVATION</a></Link>
+                        <Link><a className="hover:text-blue-400 hover:cursor-pointer">CONTACT US</a></Link>
                     </div>
 
                     <button
@@ -40,10 +39,10 @@ function Header() {
                         </button>
                     </div>
                     <nav className="flex flex-col items-start space-y-10 p-5 text-white">
-                        <Link to='services'><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">HOME</a></Link>
-                        <Link to='skills-section'><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">MENU</a></Link>
-                        <Link to='potfolio'><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">MAKE A RESERVATION</a></Link>
-                        <Link to='experience'><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">CONTACT US</a></Link>
+                        <Link to='/'><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">HOME</a></Link>
+                        <Link><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">MENU</a></Link>
+                        <Link><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">MAKE A RESERVATION</a></Link>
+                        <Link><a onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400">CONTACT US</a></Link>
                     </nav>
                 </div>
             </div>
